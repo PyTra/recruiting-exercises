@@ -1,6 +1,7 @@
 import unittest
 import random
 
+
 def computeShipments(orders: dict, warehouses: list) -> list:
     '''
 
@@ -51,12 +52,12 @@ class TestComputeShipments(unittest.TestCase):
 
     def test_multiple_warehouse_2(self):
         for i in range(10):
-            orders = {"apple": random.randint(1,10),
-                      "banana": random.randint(1,10),
-                      "orange": random.randint(1,10)}
+            orders = {"apple": random.randint(1, 10),
+                      "banana": random.randint(1, 10),
+                      "orange": random.randint(1, 10)}
             comparable = orders.copy()
-            warehouses = [{"name": "a", "inventory": {"apple" : random.randint(0,10), "banana" : random.randint(0,10),
-                                                      "orange" : random.randint(0,10)}},
+            warehouses = [{"name": "a", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
+                                                      "orange": random.randint(0, 10)}},
                           {"name": "b", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
                                                       "orange": random.randint(0, 10)}},
                           {"name": "c", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
@@ -65,16 +66,12 @@ class TestComputeShipments(unittest.TestCase):
                                                       "orange": random.randint(0, 10)}}
                           ]
             test = computeShipments(orders, warehouses)
-            output_dict = {"apple" : 0, "banana": 0, "orange" : 0}
+            output_dict = {"apple": 0, "banana": 0, "orange": 0}
             for output in test:
                 for v in output.values():
-                    for j,k in v.items():
+                    for j, k in v.items():
                         output_dict[j] += k
-            if all(output.values()) and test != []:
+            if all(output_dict.values()) and test != []:
                 self.assertDictEqual(output_dict, comparable)
             else:
                 self.assertCountEqual(test, [])
-
-
-
-
