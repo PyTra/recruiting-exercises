@@ -1,4 +1,9 @@
 
+# How to test ComputeShipments function
+
+1. Clone the code to your device
+2. Open the command line interface and change directory into the source folder
+3. Enter "python -m unittest -v ComputeShipments". This will run the predefined tests in the py file which call the function.
 
 ## Problem
 

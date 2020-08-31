@@ -50,23 +50,31 @@ class TestComputeShipments(unittest.TestCase):
         self.assertCountEqual(test, [])
 
     def test_multiple_warehouse_2(self):
-        orders = {"apple": random.randint(1,10),
-                  "banana": random.randint(1,10),
-                  "orange": random.randint(1,10)}
-        comparable = orders.copy()
-        warehouses = [{"name": "a", "inventory": {"apple" : random.randint(0,10), "banana" : random.randint(0,10),
-                                                  "orange" : random.randint(0,10)}},
-                      {"name": "b", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
-                                                  "orange": random.randint(0, 10)}},
-                      {"name": "c", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
-                                                  "orange": random.randint(0, 10)}},
-                      {"name": "d", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
-                                                  "orange": random.randint(0, 10)}}
-                      ]
-        test = computeShipments(orders, warehouses)
-        output_dict = {"apple" : 0, "banana": 0, "orange" : 0}
-        for output in test:
-            for v in output.values():
-                for j,k in v.items():
-                    output_dict[j] += k
-        self.assertDictEqual(output_dict, comparable)
+        for i in range(10):
+            orders = {"apple": random.randint(1,10),
+                      "banana": random.randint(1,10),
+                      "orange": random.randint(1,10)}
+            comparable = orders.copy()
+            warehouses = [{"name": "a", "inventory": {"apple" : random.randint(0,10), "banana" : random.randint(0,10),
+                                                      "orange" : random.randint(0,10)}},
+                          {"name": "b", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
+                                                      "orange": random.randint(0, 10)}},
+                          {"name": "c", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
+                                                      "orange": random.randint(0, 10)}},
+                          {"name": "d", "inventory": {"apple": random.randint(0, 10), "banana": random.randint(0, 10),
+                                                      "orange": random.randint(0, 10)}}
+                          ]
+            test = computeShipments(orders, warehouses)
+            output_dict = {"apple" : 0, "banana": 0, "orange" : 0}
+            for output in test:
+                for v in output.values():
+                    for j,k in v.items():
+                        output_dict[j] += k
+            if all(output.values()) and test != []:
+                self.assertDictEqual(output_dict, comparable)
+            else:
+                self.assertCountEqual(test, [])
+
+
+
+
